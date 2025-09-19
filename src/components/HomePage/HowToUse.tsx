@@ -26,7 +26,7 @@ export default function HowToUse() {
   ];
 
   return (
-    <div className="mt-10 pb-10">
+    <div className="mt-10 ">
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-green-600 text-white font-semibold shadow hover:bg-green-700 transition"
