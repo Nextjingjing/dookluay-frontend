@@ -64,8 +64,8 @@ export default function Header() {
             </Link>
           </li>
           <li className="px-6 py-2 md:p-0">
-            <Link to="/contact" className="hover:text-gray-200 transition" onClick={() => setIsOpen(false)}>
-              Contact
+            <Link to="/articles" className="hover:text-gray-200 transition" onClick={() => setIsOpen(false)}>
+              Articles
             </Link>
           </li>
         </ul>
