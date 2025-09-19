@@ -6,8 +6,13 @@ interface Disease {
   image_example?: string | null;
 }
 
+const apiUrl = import.meta.env.VITE_BASE_API;
+
 export default function DiseaseCard({ disease }: { disease: Disease }) {
-  const imageSrc = disease.image_example || "/images/no-image-available.jpg";
+  const imageSrc = disease.image_example
+  ? apiUrl + disease.image_example
+  : "/images/no-image-available.jpg";
+
 
   return (
     <div className="p-5 border rounded-xl shadow bg-white hover:shadow-md transition">
@@ -20,7 +25,7 @@ export default function DiseaseCard({ disease }: { disease: Disease }) {
       <img
         src={imageSrc}
         alt={disease.name}
-        className="w-full h-48 object-cover rounded-lg mb-3"
+        className="w-full h-75 object-cover rounded-lg mb-3"
       />
 
       {/* รายละเอียด */}
