@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 interface Disease {
   disease_id: number;
   name: string;
@@ -9,13 +11,17 @@ interface Disease {
 const apiUrl = import.meta.env.VITE_BASE_API;
 
 export default function DiseaseCard({ disease }: { disease: Disease }) {
-  const imageSrc = disease.image_example
-  ? apiUrl + disease.image_example
-  : "/images/no-image-available.jpg";
+  const navigate = useNavigate();
 
+  const imageSrc = disease.image_example
+    ? apiUrl + disease.image_example
+    : "/images/no-image-available.jpg";
 
   return (
-    <div className="p-5 border rounded-xl shadow bg-white hover:shadow-md transition">
+    <div
+      onClick={() => navigate(`/treatments/list/${disease.disease_id}`)}
+      className="p-5 border rounded-xl shadow bg-white hover:shadow-md transition cursor-pointer"
+    >
       {/* ชื่อโรค */}
       <h3 className="text-xl font-semibold text-green-700 mb-2">
         {disease.name}
@@ -25,7 +31,7 @@ export default function DiseaseCard({ disease }: { disease: Disease }) {
       <img
         src={imageSrc}
         alt={disease.name}
-        className="w-full h-75 object-cover rounded-lg mb-3"
+        className="w-full h-48 object-cover rounded-lg mb-3"
       />
 
       {/* รายละเอียด */}
