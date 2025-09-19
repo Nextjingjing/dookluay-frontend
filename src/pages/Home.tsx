@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { predictImage } from "../services/api";
+import HowToUse from "../components/HomePage/HowToUse";
 
 interface Disease {
   disease_id: number;
@@ -83,6 +84,7 @@ export default function Home() {
       <h2 className="text-3xl font-bold text-black mb-4">
         ทำนายโรคจากใบตอง 🍌
       </h2>
+      <HowToUse />
 
       {/* Drop Zone / Upload */}
       <div
