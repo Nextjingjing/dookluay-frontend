@@ -10,17 +10,26 @@ interface Disease {
   image_example?: string | null;
 }
 
+interface DiseaseResponse {
+  count: number;
+  total_pages: number;
+  current_page: number;
+  page_size: number;
+  results: Disease[];
+}
+
 export default function Articles() {
-  const [diseases, setDiseases] = useState<Disease[]>([]);
+  const [data, setData] = useState<DiseaseResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getDiseases();
-        setDiseases(data);
+        const res = await getDiseases(page, 3); // ส่ง page, size
+        setData(res);
       } catch (err: any) {
         console.error(err);
         setError("ไม่สามารถโหลดข้อมูลโรคได้");
@@ -30,7 +39,7 @@ export default function Articles() {
     };
 
     fetchData();
-  }, []);
+  }, [page]);
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -44,14 +53,39 @@ export default function Articles() {
       )}
 
       <div className="grid gap-6">
-        {Array.isArray(diseases) && diseases.length > 0 ? (
-          diseases.map((disease) => (
+        {data?.results && data.results.length > 0 ? (
+          data.results.map((disease) => (
             <DiseaseCard key={disease.disease_id} disease={disease} />
           ))
         ) : (
           !loading && <p className="text-gray-500">ไม่มีข้อมูลโรค</p>
         )}
       </div>
+
+      {/* Pagination controls */}
+      {data && data.total_pages > 1 && (
+        <div className="flex justify-center items-center gap-4 mt-6">
+          <button
+            onClick={() => setPage((p) => Math.max(p - 1, 1))}
+            disabled={page === 1}
+            className="px-3 py-2 rounded bg-gray-200 disabled:opacity-50"
+          >
+            ◀ ก่อนหน้า
+          </button>
+
+          <span>
+            หน้า {data.current_page} / {data.total_pages}
+          </span>
+
+          <button
+            onClick={() => setPage((p) => Math.min(p + 1, data.total_pages))}
+            disabled={page === data.total_pages}
+            className="px-3 py-2 rounded bg-gray-200 disabled:opacity-50"
+          >
+            ถัดไป ▶
+          </button>
+        </div>
+      )}
     </div>
   );
 }

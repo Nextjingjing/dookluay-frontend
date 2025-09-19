@@ -18,14 +18,7 @@ export const predictImage = async (file: File) => {
   });
 };
 
-export const getDiseases = async () => {
-  const res = await API.get("/api/diseases/");
-
-  if (Array.isArray(res.data)) {
-    return res.data;
-  }
-  if (res.data.results && Array.isArray(res.data.results)) {
-    return res.data.results;
-  }
-  return [];
+export const getDiseases = async (page = 1, size = 5) => {
+  const res = await API.get(`/api/diseases/?page=${page}&size=${size}`);
+  return res.data;
 };
