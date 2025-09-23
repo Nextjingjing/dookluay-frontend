@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getModels } from "../services/api";
+import ModelUsage from "../components/ModelsPage/ModelUsage";
 
 interface Model {
   model_id: number;
@@ -52,10 +53,7 @@ const Models: React.FC = () => {
 
       <div className="grid gap-4">
         {models.map((m) => (
-          <div
-            key={m.model_id}
-            className="p-4 border rounded-lg shadow bg-white"
-          >
+          <div key={m.model_id} className="mb-6 p-4 border rounded-lg bg-white shadow">
             <h3 className="text-xl font-semibold">{m.file_name}</h3>
             <p>📦 Version: {m.version}</p>
             <p>📅 Uploaded: {new Date(m.uploaded_at).toLocaleString()}</p>
@@ -67,12 +65,14 @@ const Models: React.FC = () => {
             >
               ดาวน์โหลดโมเดล
             </a>
+
+            <ModelUsage fileName={m.file_name} />
           </div>
         ))}
       </div>
 
-      {/* Pagination */}
-      <div className="flex gap-2 mt-6">
+      {/* 🔥 Pagination */}
+      <div className="flex items-center gap-3 mt-6">
         <button
           onClick={() => setPage((p) => Math.max(p - 1, 1))}
           disabled={page === 1}
@@ -80,7 +80,7 @@ const Models: React.FC = () => {
         >
           Prev
         </button>
-        <span className="px-2">
+        <span className="text-gray-700">
           Page {page} / {totalPages}
         </span>
         <button
