@@ -68,6 +68,11 @@ export default function Header() {
               Articles
             </Link>
           </li>
+          <li className="px-6 py-2 md:p-0">
+            <Link to="/models" className="hover:text-gray-200 transition" onClick={() => setIsOpen(false)}>
+              Models
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
