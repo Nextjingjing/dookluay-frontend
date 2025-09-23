@@ -27,3 +27,8 @@ export const getTreatments = async (diseaseId: number, page = 1, size = 10) => {
   const res = await API.get(`/api/treatments/?disease_id=${diseaseId}&page=${page}&size=${size}`);
   return res.data; // { count, total_pages, current_page, results }
 };
+
+export const getModels = async (page = 1, size = 5) => {
+  const res = await API.get(`/api/models/?page=${page}&size=${size}`);
+  return res.data;
+};

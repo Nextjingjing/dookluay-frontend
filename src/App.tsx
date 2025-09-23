@@ -3,6 +3,7 @@ import Home from "./pages/Home"
 import About from "./pages/About"
 import Articles from "./pages/Articles"
 import TreatmentsList from "./pages/TreatmentsList"
+import Models from "./pages/Models"
 
 export default function App() {
   return (
@@ -10,8 +11,8 @@ export default function App() {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/articles" element={<Articles />} />
-      <Route path="/articles" element={<Articles />} />
       <Route path="/treatments/list/:diseaseId" element={<TreatmentsList />} />
+      <Route path="/models" element={<Models />} />
     </Routes>
   )
 }
