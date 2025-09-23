@@ -4,6 +4,7 @@ import About from "./pages/About"
 import Articles from "./pages/Articles"
 import TreatmentsList from "./pages/TreatmentsList"
 import Models from "./pages/Models"
+import NotFound from "./pages/Notfound"
 
 export default function App() {
   return (
@@ -13,6 +14,8 @@ export default function App() {
       <Route path="/articles" element={<Articles />} />
       <Route path="/treatments/list/:diseaseId" element={<TreatmentsList />} />
       <Route path="/models" element={<Models />} />
+
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }
