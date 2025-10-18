@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { predictImage } from "../services/api";
 import HowToUse from "../components/HomePage/HowToUse";
 import SampleImages from "../components/HomePage/SampleImages";
+import { Link } from "react-router-dom";
 
 interface Disease {
   disease_id: number;
@@ -176,9 +177,18 @@ export default function Home() {
               วิเคราะห์เมื่อ:{" "}
               {new Date(result.predicted_at).toLocaleString("th-TH")}
             </p>
+
+            {/* ✅ ปุ่มอ่านข้อมูลเพิ่มเติม */}
+            <Link
+              to={`/treatments/list/${result.disease?.disease_id}`}
+              className="inline-block mt-4 px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700"
+            >
+              อ่านข้อมูลการรักษาเพิ่มเติม
+            </Link>
           </div>
         </div>
       )}
+
     </div>
   );
 }
